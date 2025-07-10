@@ -1,48 +1,89 @@
 GET http://localhost:3000/menu HTTP/1.1
 
-###
-GET http://localhost:3000/menu/11 HTTP/1.1
+### error: el ID debe ser un número entero
+GET http://localhost:3000/menu/S HTTP/1.1
 
-###
+### error: el ID no existe
+GET http://localhost:3000/menu/999 HTTP/1.1
+
+### forma correcta
+GET http://localhost:3000/menu/1 HTTP/1.1
+
+### error: campo nombre obligatorio
 POST http://localhost:3000/menu HTTP/1.1
 Content-Type: application/json
 
 {
-  "id": 11,
-    "nombre": "Perro Caliente",
-    "tipo": "Comida Rápida",
-    "ingredientes": [
-      "Pan",
-      "Salchicha",
-      "Mostaza",
-      "Ketchup",
-      "Cebolla",
-      "Queso Cheddar"
-    ],
-    "calorias": 350,
-    "precio": 5.99,
-    "vegetariano": false
+    "nombre": "",
+    "precio": 10.5
 }
-###
-PUT http://localhost:3000/menu/11 HTTP/1.1
+
+### error: campo precio debe ser un número positivo
+POST http://localhost:3000/menu HTTP/1.1
 Content-Type: application/json
 
 {
-  "nombre": "Hamburguesa con Queso",
-  "tipo": "Comida Rápida",
-  "ingredientes": [
-    "Pan",
-    "Carne de Res",
-    "Queso Cheddar",
-    "Lechuga",
-    "Tomate",
-    "Cebolla",
-    "Pepinillos"
-  ],
-  "calorias": 500,
-  "precio": 8.99,
-  "vegetariano": false
+    "nombre": "Ensalada",
+    "precio": -5
 }
 
-###
-DELETE http://localhost:3000/menu/11 HTTP/1.1
+### error: la descripción debe ser un string
+POST http://localhost:3000/menu HTTP/1.1
+Content-Type: application/json
+
+{
+    "nombre": "Ensalada",
+    "precio": 10.5,
+    "descripcion": 123
+}
+
+### forma correcta
+POST http://localhost:3000/menu HTTP/1.1
+Content-Type: application/json
+
+{
+    "nombre": "Ensalada",
+    "precio": 10.5,
+    "descripcion": "Ensalada fresca con vegetales"
+}
+
+### error: el ID debe ser un número entero
+PUT http://localhost:3000/menu/S HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": "S",  
+    "nombre": "Ensalada",
+    "precio": 10.5,
+    "descripcion": "Ensalada fresca con vegetales"
+}
+
+### error: el ID no existe
+PUT http://localhost:3000/menu/999 HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 999,
+    "nombre": "Ensalada",
+    "precio": 10.5,
+    "descripcion": "Ensalada fresca con vegetales"
+}
+
+### forma correcta
+PUT http://localhost:3000/menu/6 HTTP/1.1
+Content-Type: application/json
+
+{
+    "nombre": "Ensalada",
+    "precio": 10.5,
+    "descripcion": "Ensalada fresca con vegetales"
+}
+
+### error: el ID debe ser un número entero
+DELETE http://localhost:3000/menu/S HTTP/1.1
+
+### error: el ID no existe
+DELETE http://localhost:3000/menu/999 HTTP/1.1
+
+### forma correcta
+DELETE http://localhost:3000/menu/6 HTTP/1.1
