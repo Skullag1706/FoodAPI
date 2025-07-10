@@ -69,6 +69,34 @@ Content-Type: application/json
     "descripcion": "Ensalada fresca con vegetales"
 }
 
+### error: campo nombre obligatorio
+PUT http://localhost:3000/menu/6 HTTP/1.1
+Content-Type: application/json
+
+{
+    "nombre": "",
+    "precio": 10.5,
+    "descripcion": "Ensalada fresca con vegetales"
+}
+### error: campo precio debe ser un número positivo
+PUT http://localhost:3000/menu/6 HTTP/1.1
+Content-Type: application/json
+
+{
+    "nombre": "Ensalada",
+    "precio": -5,
+    "descripcion": "Ensalada fresca con vegetales"
+}
+### error: la descripción debe ser un string
+PUT http://localhost:3000/menu/6 HTTP/1.1
+Content-Type: application/json
+
+{
+    "nombre": "Ensalada",
+    "precio": 10.5,
+    "descripcion": 123
+}
+
 ### forma correcta
 PUT http://localhost:3000/menu/6 HTTP/1.1
 Content-Type: application/json
